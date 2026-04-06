@@ -2,6 +2,7 @@ package ejHashmap4;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class ELIZA {
 	
@@ -18,6 +19,14 @@ public class ELIZA {
 		respuestas.put("hora", "Lo siento, no llevo reloj");
 		respuestas.put("nombre", "Mi nombre es Eliza");
 		
+		//filtrado de palabras no adecuadas
+		ArrayList<String> inadecuadas = new ArrayList<>();
+		
+		inadecuadas.add("mierda");
+		inadecuadas.add("joder");
+		inadecuadas.add("puta");
+		inadecuadas.add("tonto");
+		
 		while (true) {
 			
 			System.out.print("Tú: ");
@@ -29,6 +38,21 @@ public class ELIZA {
                 break;
 			
 		}
+            
+         // filtro de palabras
+            boolean ofensiva = false;
+
+            for (String palabra : inadecuadas) {
+                if (frase.contains(palabra)) {
+                    ofensiva = true;
+                    break;
+                }
+            }
+
+            if (ofensiva) {
+                System.out.println("Eliza: Ese mensaje no es adecuado");
+                continue;
+            }
 		
 		boolean encontrada = false;
 		
